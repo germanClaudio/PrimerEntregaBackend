@@ -1,1 +1,82 @@
-[{"id":1,"timestamp":"10/10/2022, 16:36:52","name":"Perfume Champions","description":"Marca Carolina Herrera - 90ml","price":125,"picture":"http://localhost:8080/Perfume_1.jpg","code":"AA125","stock":10},{"id":2,"timestamp":"29/9/2022, 09:14:59","name":"Perfume Scandalete","description":"Perfume Vicky - 100ml","price":225,"picture":"http://localhost:8080/Perfume_2.jpg","code":"AA126","stock":20},{"id":3,"timestamp":"29/9/2022, 09:24:59","name":"Perfume Te fuiste a la B","description":"Perfume Abon - 100ml","price":150,"picture":"http://localhost:8080/Perfume_3.jpg","code":"AA127","stock":5},{"id":4,"timestamp":"10/10/2022, 16:35:40","name":"Perfume Los Haroldos","description":"Marca Avon - 80ml","price":87,"picture":"http://localhost:8080/Perfume_4.jpg","code":"AR236","stock":12},{"id":5,"timestamp":"10/10/2022, 16:31:03","name":"Perfume New New York","description":"Marca Cañon -75ml","price":135,"picture":"http://localhost:8080/Perfume_6.jpg","code":"AM232","stock":11},{"id":6,"timestamp":"09/10/2022, 17:15:50","name":"Perfume New New York","description":"Marca CoderHouse - 100ml","price":230,"picture":"http://localhost:8080/Perfume_2.jpg","code":"AQ253","stock":8},{"id":7,"timestamp":"10/10/2022, 16:23:42","name":"Perfume Barcelona","description":"Marca Messi - 50ml","price":112,"picture":"http://localhost:8080/Perfume_3.jpg","code":"AR010","stock":3},{"id":8,"timestamp":"11/10/2022, 11:07:30","name":"Perfume Carioca","description":"Marca Brasil - 85ml","price":185,"picture":"http://localhost:8080/Perfume_2.jpg","code":"AP122","stock":12}]
+[
+    {
+        "id": 1,
+        "timestamp": "10/10/2022, 16:36:52",
+        "name": "Perfume Champions",
+        "description": "Marca Carolina Herrera - 90ml",
+        "price": 125,
+        "picture": "http://localhost:8080/Perfume_1.jpg",
+        "code": "AA125",
+        "stock": 10
+    },
+    {
+        "id": 2,
+        "timestamp": "29/9/2022, 09:14:59",
+        "name": "Perfume Scandalete",
+        "description": "Marca Vicky - 100ml",
+        "price": 225,
+        "picture": "http://localhost:8080/Perfume_2.jpg",
+        "code": "AA126",
+        "stock": 20
+    },
+    {
+        "id": 3,
+        "timestamp": "29/9/2022, 09:24:59",
+        "name": "Perfume Te fuiste a la B",
+        "description": "Marca Abon - 100ml",
+        "price": 150,
+        "picture": "http://localhost:8080/Perfume_3.jpg",
+        "code": "AA127",
+        "stock": 5
+    },
+    {
+        "id": 4,
+        "timestamp": "10/10/2022, 16:35:40",
+        "name": "Perfume Los Haroldos",
+        "description": "Marca Avon - 80ml",
+        "price": 87,
+        "picture": "http://localhost:8080/Perfume_4.jpg",
+        "code": "AR236",
+        "stock": 12
+    },
+    {
+        "id": 5,
+        "timestamp": "10/10/2022, 16:31:03",
+        "name": "Perfume New New York",
+        "description": "Marca Cañon -75ml",
+        "price": 135,
+        "picture": "http://localhost:8080/Perfume_6.jpg",
+        "code": "AM232",
+        "stock": 11
+    },
+    {
+        "id": 6,
+        "timestamp": "09/10/2022, 17:15:50",
+        "name": "Perfume New New York",
+        "description": "Marca CoderHouse - 100ml",
+        "price": 230,
+        "picture": "http://localhost:8080/Perfume_2.jpg",
+        "code": "AQ253",
+        "stock": 8
+    },
+    {
+        "id": 7,
+        "timestamp": "10/10/2022, 16:23:42",
+        "name": "Perfume Barcelona",
+        "description": "Marca Messi - 50ml",
+        "price": 112,
+        "picture": "http://localhost:8080/Perfume_3.jpg",
+        "code": "AR010",
+        "stock": 3
+    },
+    {
+        "id": 8,
+        "timestamp": "10/10/2022, 16:23:42",
+        "name": "Perfume Aromas del Cairo",
+        "description": "Marca Cloclo - 85ml",
+        "price": 99,
+        "picture": "http://localhost:8080/Perfume_1.jpg",
+        "code": "AR010",
+        "stock": 5
+    }
+]

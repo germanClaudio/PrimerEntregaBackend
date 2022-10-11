@@ -2,6 +2,9 @@
 // const app = express()
 // const router = require('./modulos/rutas')
 
+// app.use(express.json())
+// app.use(express.urlencoded({ extended: true }))
+
 // const { Server: IOServer } = require('socket.io')
 // const { Server: HttpServer } = require('http')
 
@@ -54,7 +57,17 @@
 // }
 
 
+
 // // --------------  Products ----------------
+
+// router.delete('/:id', (req, res) => {
+//     const { id } = req.params
+//     const productDeleted = containerProduct.deleteById(id)
+//     console.log('producto a borrar: '+productDeleted)
+//     res.setHeader('Content-Type', 'application/json')
+//     res.status(200).render( 'productDeleted', { productDeleted } )
+// })
+
 // socket.on('productsAll', (arrProd) => {
 //     // socket.emit('respuesta', { socketID: data.id, mensaje: data } )
 //     renderProduct(arrProd)

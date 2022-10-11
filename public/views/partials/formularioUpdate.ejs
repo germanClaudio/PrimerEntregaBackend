@@ -1,41 +1,50 @@
 <div class="form-group col-1 mx-auto my-5 w-75 border p-3 bg-dark bg-gradient text-white bg-opacity-75">
-    <form action="/api/productos/<%= getProductById.id %>" method="post" >
+    <form action="/api/productos/<%= getProductById.id %>" method="post">
         <div>
-            <h4 class="d-block mx-auto my-2 text-center">Update Product</h4>
+            <fieldset>
+                <h4 class="d-block mx-auto my-2 text-center">Update Product</h4>
                 <input type="hidden" name="_method" value="put" />
                 <label for="name">Id#</label>
-                <input type="text" name="id" id="id" class="form-control my-2" value="<%= getProductById.id %>" disabled>
-                
+                <input type="text" name="id" id="id" class="form-control my-2" value="<%= getProductById.id %>"
+                    disabled>
+
                 <label for="name">Title</label>
-                <input type="text" name="name" id="name" class="form-control my-2" value="<%= getProductById.name %>" placeholder="Name Product" required>
-                
+                <input type="text" name="name" id="name" class="form-control my-2" value="<%= getProductById.name %>"
+                    placeholder="Name Product" required>
+
                 <label for="description">Description</label>
-                <input type="text" name="description" id="description" class="form-control my-2" value="<%= getProductById.description %>" placeholder="Description Product" required>
-                
+                <input type="text" name="description" id="description" class="form-control my-2"
+                    value="<%= getProductById.description %>" placeholder="Description Product" required>
+
                 <label for="price">Price ($)</label>
-                <input type="text" name="price" id="price" class="form-control my-2" value="<%= getProductById.price %>" placeholder="Ex. 150" required>
-                
+                <input type="text" name="price" id="price" class="form-control my-2" value="<%= getProductById.price %>"
+                    placeholder="Ex. 150" required>
+
                 <label for="picture">Picture URL</label>
-                <input type="text" name="picture" id="picture" class="form-control my-2" value="<%= getProductById.picture %>" placeholder="Picture url" required>
-                
+                <input type="text" name="picture" id="picture" class="form-control my-2"
+                    value="<%= getProductById.picture %>" placeholder="Picture url" required>
+
                 <label for="code">Code</label>
-                <input type="text" name="code" id="code" class="form-control my-2" value="<%= getProductById.code %>" placeholder="Code" required>
-                
+                <input type="text" name="code" id="code" class="form-control my-2" value="<%= getProductById.code %>"
+                    placeholder="Code" required>
+
                 <label for="stock">Stock</label>
-                <input type="text" name="stock" id="stock" class="form-control my-2" value="<%= getProductById.stock %>" placeholder="Stock" required>
-                
+                <input type="text" name="stock" id="stock" class="form-control my-2" value="<%= getProductById.stock %>"
+                    placeholder="Stock" required>
+
                 <div class="d-flex justify-content-center mt-3">
                     <button type="submit" class="btn btn-primary mx-auto">Update<i class="fa fa-save"></i></button>
-                </div>    
-        </fieldset>
+                </div>
+            </fieldset>
     </form>
     <br>
-    <form action="/api/productos/" method="delete">
+    <!-- <form action="/api/productos/" method="POST"> -->
+    <form onsubmit="return deleteById(this)">
         <fieldset>
             <input type="hidden" name="id" class="form-control my-2" value="<%= getProductById.id %>">
-                <div class="d-flex justify-content-center">
-                    <button type="submit" class="btn btn-danger mx-auto">Delete <i class="fa fa-trash"></i></button>
-                </div>    
+            <div class="d-flex justify-content-center">
+                <button type="submit" class="btn btn-danger mx-auto">Delete <i class="fa fa-trash"></i></button>
+            </div>
         </fieldset>
     </form>
 </div>
