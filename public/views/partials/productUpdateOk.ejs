@@ -1,0 +1,30 @@
+<div class="container-fluid w-75 mx-auto">
+       
+    <% if ( updateProductById !== undefined ) { %>
+        <div class="col-12">
+            <div class="card shadow" style="max-width: 1040px;">
+                <div class="row g-0">
+                    <div class="col-md-4 my-auto">
+                        <img src='<%= updateProductById.picture %>' class="img-fluid rounded-center"
+                            alt="Image Product">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body border-start border-dark">
+                            <h5 class="card-title"> Product #id <%=updateProductById.id %> - <%=updateProductById.name %> Updated succesfully!</h5>
+                            <ul class="card-text">
+                                <li class="">Description: <%= updateProductById.description %></li>
+                                <li class="">Price $<strong> <%= updateProductById.price %></strong></li>
+                                <li class="">Code:<strong> <%= updateProductById.code %></strong></li>   
+                            </ul>
+                            <p class="card-text"><small class="text-muted">Stock <%= updateProductById.stock %>
+                                </small></p>
+                            <p class="card-text"><small class="text-muted">Date <%= updateProductById.timestamp %>
+                                </small></p>    
+                            <a href="/api/productos" class="btn btn-primary btn-sm ms-3">See Catalogue</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <% }; %>
+</div>
