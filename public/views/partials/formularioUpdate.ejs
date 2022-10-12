@@ -1,9 +1,9 @@
 <div class="form-group col-1 mx-auto my-5 w-75 border p-3 bg-dark bg-gradient text-white bg-opacity-75">
     <form action="/api/productos/<%= getProductById.id %>" method="post">
-        <div>
+    <!-- <form onsubmit="return updateProductById(this)"> -->
             <fieldset>
                 <h4 class="d-block mx-auto my-2 text-center">Update Product</h4>
-                <input type="hidden" name="_method" value="put" />
+                <!-- <input type="hidden" name="_method" value="put" /> -->
                 <label for="name">Id#</label>
                 <input type="text" name="id" id="id" class="form-control my-2" value="<%= getProductById.id %>"
                     disabled>
@@ -33,15 +33,15 @@
                     placeholder="Stock" required>
 
                 <div class="d-flex justify-content-center mt-3">
-                    <button type="submit" class="btn btn-primary mx-auto">Update<i class="fa fa-save"></i></button>
+                    <button type="submit" class="btn btn-primary mx-auto">Update <i class="fa fa-save"></i></button>
                 </div>
             </fieldset>
     </form>
     <br>
-    <!-- <form action="/api/productos/" method="POST"> -->
-    <form onsubmit="return deleteById(this)">
+    <form action="/api/productos/<%= getProductById.id %>" method="DELETE">
+    <!-- <form onsubmit="return deleteById(this)"> -->
         <fieldset>
-            <input type="hidden" name="id" class="form-control my-2" value="<%= getProductById.id %>">
+            <input type="hidden" name="id" id="id" class="form-control my-2" value="<%= getProductById.id %>">
             <div class="d-flex justify-content-center">
                 <button type="submit" class="btn btn-danger mx-auto">Delete <i class="fa fa-trash"></i></button>
             </div>

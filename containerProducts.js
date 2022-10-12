@@ -47,14 +47,17 @@ module.exports = class ContainerProducts {
             }
     }
 
-    updateProduct(id, timestamp, name, description, price, picture, code, stock) {  //id, timestamp, name, description, price, picture, code, stock
+    updateProduct(id, timestamp, name, description, price, picture, code, stock ) { //updateProductById //id, timestamp, name, description, price, picture, code, stock
+           
             const fileContent = this.products
             const productId = fileContent.find(item => item.id === Number(id))
+
+            // updateProductById = JSON.stringify( [{ id: Number(id), ...updateProductById}], null, 2)
     
             if (productId.id !== undefined && productId.id > 0 || productId !== {}) {
                 const nonUpdatedProducts = fileContent.filter(item => item.id !== parseInt(id))
                 const updatedProduct = { id: Number(id), timestamp, name, description, price: Number(price), picture, code, stock: Number(stock) }
-                
+                console.log(updatedProduct)
                 let array = [updatedProduct, ...nonUpdatedProducts]
                 let arrayOrdered = array.sort((a,b) => { return a.id - b.id })
                 //console.log('Array ordered: '+JSON.stringify(arrayOrdered))

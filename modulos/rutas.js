@@ -52,13 +52,17 @@ router.get('/:id', (req, res) => {
 
 //--------Router PUT ---------
 router.post('/:id', (req, res) => {
+    console.log('Put: ' + req.params.id)
     const today = new Date()
     const timestamp = today.toLocaleString('en-GB')
     const { id } = req.params
     const { name, description, price, picture, code, stock } = req.body
-    const updateProductById = containerProduct.updateProduct(id, timestamp, name, description, price, picture, code, stock)
     
-    res.setHeader('Content-Type', 'application/json')
+    const updateProductById = containerProduct.updateProduct(id, timestamp, name, description, price, picture, code, stock)
+
+    // containerProduct.updateProduct( id, updateProductById )
+    
+    // res.setHeader('Content-Type', 'application/json')
     res.status(201).render('productUpdated', { updateProductById } )
 })
 
@@ -67,8 +71,8 @@ router.post('/:id', (req, res) => {
 router.delete('/:id', (req, res) => {
     const { id } = req.params
     const productDeleted = containerProduct.deleteById(id)
-    console.log('producto a borrar: '+productDeleted)
-    res.setHeader('Content-Type', 'application/json')
+    console.log('producto a borrar: ' + productDeleted)
+    // res.setHeader('Content-Type', 'application/json')
     res.status(200).render( 'productDeleted', { productDeleted } )
 })
 
