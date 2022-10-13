@@ -86,11 +86,30 @@ routerCart.post('/:id_Cart/productos', (req, res) => {
 //--------Router DELETE PRODUCT IN CART BY ID PRODUCT ---------
 routerCart.delete('/:id_Cart/productos/:id', (req, res) => {
     const { id_Cart, id } = req.params
-    const productDeleted = containerCart.deleteProductById(id_Cart, id)
-    
-    console.log('Producto de Carrito a borrar: ' + JSON.stringify(productDeleted))
 
-    res.json(JSON.stringify(productDeleted))
+    console.log('0-ID cart: '+ id_Cart + ' - id: ' + id)
+
+    const cartId = containerCart.getCartById(id_Cart)
+
+    console.log('1-cartId: '+ cartId)
+
+    const index = cartId.productos.findIndex((item, indice) => {
+        if(item.id === id) {
+            return true
+        }
+    })
+
+    const productsUpdated = cartId.productos.filter((prod, indice) => prod.id != id)
+
+    cartId.productos = productsUpdated
+
+    let respuesta = containerCart.updateCart(cartId)
+
+    // const productDeleted = containerCart.deleteProductById(id_Cart, id)
+    
+    // console.log('Producto de Carrito a borrar: ' + JSON.stringify(productDeleted))
+
+    res.json(JSON.stringify(respuesta))
 })
 
 module.exports = routerCart;
