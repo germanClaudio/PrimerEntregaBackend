@@ -25,3 +25,4 @@ const renderProduct = (arrProd) => {
 
     document.getElementById('capProdList').innerHTML = htmlProdList
 }
+

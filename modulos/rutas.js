@@ -16,8 +16,7 @@ const admin = true  // change to false to simulate user, change to true to simul
 
 //--------Router GET ALL ---------
 router.get('/', (req, res) => {
-    res.setHeader('Content-Type', 'text/html')
-    res.render('index', { getAllProducts, admin } )
+    res.json(getAllProducts)
 })
 
 //--------Router GET BY ID ---------
@@ -25,8 +24,7 @@ router.get('/:id', (req, res) => {
     const { id } = req.params
     const getProductById = containerProduct.getById(Number(id))
     //console.log(admin)
-    res.setHeader('Content-Type', 'text/html')
-    res.render('productSelected', { getProductById, admin } )
+    res.json(getProductById)
 })
 
 //--------Router POST ---------
@@ -46,12 +44,11 @@ router.get('/:id', (req, res) => {
     }
     
     containerProduct.saveProduct(addProduct)
-    res.setHeader('Content-Type', 'application/json')
-    res.status(201).render('productSaved', { addProduct } )
+    res.json(addProduct)
 })
 
 //--------Router PUT ---------
-router.post('/:id', (req, res) => {
+router.put('/:id', (req, res) => {
     console.log('Put: ' + req.params.id)
     const today = new Date()
     const timestamp = today.toLocaleString('en-GB')
@@ -60,20 +57,16 @@ router.post('/:id', (req, res) => {
     
     const updateProductById = containerProduct.updateProduct(id, timestamp, name, description, price, picture, code, stock)
 
-    // containerProduct.updateProduct( id, updateProductById )
-    
-    // res.setHeader('Content-Type', 'application/json')
-    res.status(201).render('productUpdated', { updateProductById } )
+    res.json(updateProductById)
 })
-
 
 //--------Router DELETE BY ID ---------
 router.delete('/:id', (req, res) => {
     const { id } = req.params
     const productDeleted = containerProduct.deleteById(id)
     console.log('producto a borrar: ' + productDeleted)
-    // res.setHeader('Content-Type', 'application/json')
-    res.status(200).render( 'productDeleted', { productDeleted } )
+    
+    res.json(productDeleted)
 })
 
 module.exports = router;

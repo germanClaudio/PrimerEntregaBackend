@@ -2,7 +2,6 @@ const socket = io.connect()
 
 // --------------  Products ----------------
 socket.on('productsAll', (arrProd) => {
-    // socket.emit('respuesta', { socketID: data.id, mensaje: data } )
     renderProduct(arrProd)
 })
 
@@ -45,7 +44,7 @@ const renderProduct = (arrProd) => {
 								<p class="card-text"><small class="text-muted">Stock: ${element.stock}</small></p>
 								<a href="/api/productos/${element.id}" class="btn btn-success btn-sm">See
 									Product <i class="fa fa-eye"></i></a>
-							</div>
+                            </div>
 						</div>
 					</div>
 				</div>`)
@@ -53,40 +52,10 @@ const renderProduct = (arrProd) => {
 
     document.getElementById('mostrarProductos').innerHTML = html
 
-    // document.getElementById('name').value = ""
-    // document.getElementById('price').value = ""
-    // document.getElementById('picure').value = ""
-}
-
-socket.on('deleteProduct', (ProductIdDeleted) => {
-    // socket.emit('respuesta', { socketID: data.id, mensaje: data } )
-    renderProduct(ProductIdDeleted)
-})
-
-
-const renderProductDeleted = (ProductIdDeleted) => {
-    // console.log('render..... ' + JSON.parse(producto))
-    const arrayProd = JSON.parse(ProductIdDeleted)
-
-    const html = arrayProd.map((element) => {
-        // console.log('Dentro del html '+data)
-        return (`<tr>
-                    <th scope="row" class="text-center"><strong>${element.id}</strong></th>
-                    <td class="text-center">${element.title}</td>
-                    <td class="text-center">$${element.price}</td>
-                    <td class="text-center"><img class="img-fluid rounded" alt="Product Image" src='${element.thumbnail}' width="100" height="80"></td>
-                    <td class="text-center">${element.thumbnail}</td>
-                </tr>`)
-    }).join(" ");
-
-    document.getElementById('mostrarProductos').innerHTML = html
-
-    const htmlProdList = 
-        ( `<caption id="capProdList">Total Product List ${arrayProd.length}</caption>`)
-
-    document.getElementById('capProdList').innerHTML = htmlProdList    
-
-    document.getElementById('title').value = ""
+    document.getElementById('name').value = ""
+    document.getElementById('description').value = ""
+    document.getElementById('code').value = ""
     document.getElementById('price').value = ""
-    document.getElementById('thumbnail').value = ""
+    document.getElementById('picure').value = ""
+    document.getElementById('stock').value = ""
 }

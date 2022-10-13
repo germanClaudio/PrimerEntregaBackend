@@ -1,41 +1,72 @@
+#####################   PRODUCTS   #####################
 ### POST
-
 POST http://localhost:8082/api/productos HTTP/1.1
 Content-type: application/json
 Authorization: Basic trusted:secret  
 
 {
-        "id": 8,
-        "timestamp": "11/10/2022, 09:49:13",
-        "name": "Perfume Aromas del Cairo",
+        "name": "Perfume Chalenge",
         "description": "Marca Channel - 85ml",
         "price": 185,
-        "picture": "http://localhost:8082/Perfume_2.jpg",
+        "picture": "http://localhost:8082/Perfume_1.jpg",
         "code": "AP166",
         "stock": 17
 }
 
 ### GET 
-GET http://localhost:8080/api/productos/7 HTTP/1.1
+GET http://localhost:8082/api/productos/8 HTTP/1.1
 Content-Type: application/json
 
 
 ### PUT ----> UPDATE
-PUT http://localhost:8082/api/productos/7 HTTP/1.1
+PUT http://localhost:8082/api/productos/9 HTTP/1.1
 Content-Type: application/json
 
 {
         "id": 7,
-        "timestamp": "11/10/2022, 09:49:13",
         "name": "Perfume Carioca",
         "description": "Marca Brasil - 85ml",
-        "price": 111,
+        "price": 75,
         "picture": "http://localhost:8082/Perfume_2.jpg",
-        "code": "AP122",
-        "stock": 12
+        "code": "AP123",
+        "stock": 11
 }
 
 ### DELETE
-DELETE http://localhost:8082/api/productos/6 HTTP/1.1
+DELETE http://localhost:8082/api/productos/9 HTTP/1.1
 Content-Type: application/json
 Authorization: Basic trusted:secret
+
+
+
+
+#####################   CART   #####################
+### POST
+POST http://localhost:8082/api/carrito HTTP/1.1
+Content-type: application/json
+Authorization: Basic trusted:secret
+
+### DELETE
+DELETE http://localhost:8082/api/carrito/8 HTTP/1.1
+Content-Type: application/json
+Authorization: Basic trusted:secret
+
+### GET 
+GET http://localhost:8082/api/carrito/10/productos HTTP/1.1
+Content-Type: application/json
+
+### POST
+POST http://localhost:8082/api/carrito/1/productos HTTP/1.1
+Content-type: application/json
+Authorization: Basic trusted:secret
+
+{
+        "id": 3,
+        "timestamp": "12/10/2022, 08:49:17",
+        "name": "Perfume Champions",
+        "description": "Marca Carol Fair - 90ml",
+        "price": 125,
+        "picture": "http://localhost:8082/Perfume_1.jpg",
+        "code": "AA125",
+        "stock": 10
+      }

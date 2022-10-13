@@ -25,7 +25,7 @@ module.exports = class ContainerProducts {
             if (product) {
                 return product
             } else {
-                return { Error: 'Producto no encontrado!!' }
+                return { Error: `Sorry, we could not find the Product with the ID# ${id}!` }
             }
     }
 
@@ -47,30 +47,29 @@ module.exports = class ContainerProducts {
             }
     }
 
-    updateProduct(id, timestamp, name, description, price, picture, code, stock ) { //updateProductById //id, timestamp, name, description, price, picture, code, stock
+    updateProduct(id, timestamp, name, description, price, picture, code, stock ) {
            
             const fileContent = this.products
             const productId = fileContent.find(item => item.id === Number(id))
-
-            // updateProductById = JSON.stringify( [{ id: Number(id), ...updateProductById}], null, 2)
-    
-            if (productId.id !== undefined && productId.id > 0 || productId !== {}) {
+            
+            if (productId !== undefined && productId.id > 0 && productId !== null) {
                 const nonUpdatedProducts = fileContent.filter(item => item.id !== parseInt(id))
                 const updatedProduct = { id: Number(id), timestamp, name, description, price: Number(price), picture, code, stock: Number(stock) }
-                console.log(updatedProduct)
+                
                 let array = [updatedProduct, ...nonUpdatedProducts]
                 let arrayOrdered = array.sort((a,b) => { return a.id - b.id })
                 //console.log('Array ordered: '+JSON.stringify(arrayOrdered))
                 try {
                     this.products = fs.writeFileSync(this.myFile, JSON.stringify(arrayOrdered))
-                    return updatedProduct
+                    return {Response: `Product ${updatedProduct.name} Updated Successfully!!
+                                        ${JSON.stringify(updatedProduct, null, 2)}`}
     
                 } catch (error) {
                     return { Error: `Error Actualizando Producto. Descripción error: ${error}` }
                 }
     
             } else {
-                return { Error: 'Producto no encontrado!!' }
+                return { Error: `Sorry, we could not find the Product with the ID# ${id}!` }
             }
         }
     
@@ -91,7 +90,7 @@ module.exports = class ContainerProducts {
                     }
     
             } else {
-                return { Error: `Lo sentimos, el Id# ${id}, NO existe en nuestra Base de Datos!` }
+                return { Error: `Sorry, the product with Id# ${id}, DOES NOT exist on the DB!` }
             }
         }
 }
