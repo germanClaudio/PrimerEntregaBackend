@@ -28,7 +28,7 @@ module.exports = class ContainerCart {
                 // console.log('try de saveproducts: '+ productToSave)
                 return { addCart }
             } catch (error) {
-                console.log(error)
+                // console.log(error)
                 return { Error: 'Upps! Hubo un error y no pudimos guardar el Producto.' }
             }
         } else {
@@ -76,19 +76,19 @@ module.exports = class ContainerCart {
             const fileContent = this.carts
             const cartId = fileContent.find(item => item.id_Cart === Number(id_Cart))
             
-            console.log('4-ID: '+id_Cart)
-            console.log('5-cartId (updateCArt): '+ JSON.stringify(cartId, null, 2))
+            // console.log('4-ID: '+id_Cart)
+            // console.log('5-cartId (updateCArt): '+ JSON.stringify(cartId, null, 2))
 
             if ( cartId.id_Cart !== undefined && cartId.id_Cart > 0 || cartId !== {} ) {
                 const nonUpdatedCarts = fileContent.filter(item => item.id_Cart !== parseInt(id_Cart))
                 const updatedCart = { id_Cart: Number(id_Cart), timestamp: producToAdd.timestamp , productos: [...cartId.productos, producToAdd] }
                 
-                console.log('6-CartUpdated: '+ JSON.stringify(updatedCart))
+                // console.log('6-CartUpdated: '+ JSON.stringify(updatedCart))
                 
                 let array = [updatedCart, ...nonUpdatedCarts]
                 let arrayOrdered = array.sort((a,b) => { return a.id - b.id })
                 
-                console.log('7-Array ordered: '+JSON.stringify(arrayOrdered))
+                // console.log('7-Array ordered: '+JSON.stringify(arrayOrdered))
                 
                 try {
                     this.carts = fs.writeFileSync(this.myFile, JSON.stringify(arrayOrdered))
