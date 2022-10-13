@@ -28,9 +28,9 @@ routerCart.post("/", (req, res) => {
         timestamp: timestamp,
         productos: []
     }
-    
+
     containerCart.saveCart(addCart)
-    res.json( { Success: `Cart Added successfully - ${JSON.stringify(addCart)} `} )
+    res.json({ Success: `Cart Added successfully - ${JSON.stringify(addCart)} ` })
 })
 
 //--------Router DELETE BY ID ---------
@@ -38,7 +38,7 @@ routerCart.delete('/:id', (req, res) => {
     const { id } = req.params
     const cartDeleted = containerCart.deleteById(id)
     // console.log('Carrito a borrar: ' + JSON.stringify(cartDeleted))
-    res.json( JSON.stringify(cartDeleted) )
+    res.json(JSON.stringify(cartDeleted))
 })
 
 //--------Router GET BY ID ---------
@@ -46,15 +46,15 @@ routerCart.get('/:id_Cart/productos', (req, res) => {
     const { id_Cart } = req.params
     // console.log('params: ' + JSON.stringify(id_Cart))
     const getCart = containerCart.getCartById(Number(id_Cart))
-    
-    if(admin === false) {
+
+    if (admin === false) {
         res.json({ Error: 'Upps! You do not have permissions to see this!' })
     } else {
-        console.log('Cart: ' + JSON.stringify(getCart.id_Cart) + ' - id: '+ id_Cart)
+        console.log('Cart: ' + JSON.stringify(getCart.id_Cart) + ' - id: ' + id_Cart)
         if (getCart.productos === undefined) {
-            res.json( { Error: `Sorry, we could not find the Product with the ID# ${id_Cart}!`} )
+            res.json({ Error: `Sorry, we could not find the Product with the ID# ${id_Cart}!` })
         }
-        res.json({ ServerAnswer: `Id Cart#: ${getCart.id_Cart} , products: ${JSON.stringify(getCart.productos)} `})
+        res.json({ ServerAnswer: `Id Cart#: ${getCart.id_Cart} , Products: ${JSON.stringify(getCart.productos, null, 2)} ` })
     }
 })
 
@@ -63,36 +63,34 @@ routerCart.post('/:id_Cart/productos', (req, res) => {
     const { id_Cart } = req.params
     const getCart = containerCart.getCartById(Number(id_Cart))
     const body = req.body
+    console.log('0-getcartlenght: ' + JSON.stringify(getCart))
 
-    console.log('id: ' + id_Cart)
-    console.log('getcart: ' + JSON.stringify(getCart))
-    console.log('CartBody: ' + JSON.stringify(body))
+    // res.json( { Error: `We could not find the Cart with the id#${id_Cart}` })
+    // console.log('1-id: ' + id_Cart)
+    // console.log('2-getcart: ' + JSON.stringify(getCart, null, 2))
+    // console.log('3-Producto a agregar: ' + JSON.stringify(body, null, 2))
 
-    if(admin === false) {
+    if (admin === false) {
         res.json({ Error: 'Upps! You do not have permissions to do this!' })
-    } else {
-        let productsInCart = body.forEach(id => {
-            const product = containerProduct.getById(id)
-            getCart.productos.push(product)
-        })
-        res.json({ ServerAnswer: `Id Cart#: ${productsInCart}`})
-    }
     
+    } else {
+        const dbresponse = containerCart.updateCart(id_Cart, body)
+        // console.log('8-db response: ' + JSON.stringify(dbresponse, null, 2))
+        // console.log('10-productsInCArt: ' + JSON.stringify(productsInCart, null, 2))
+
+        res.json({ ServerAnswer: `11- Id Cart#: ${id_Cart} - Product added: ${JSON.stringify(dbresponse, null, 2)}` })
+    }
+
 })
 
-//--------Router PUT ---------
-// routerCart.post('/:id', (req, res) => {
-//     console.log('Put: ' + req.params.id)
-//     const today = new Date()
-//     const timestamp = today.toLocaleString('en-GB')
-//     const { id } = req.params
-//     const { name, description, price, picture, code, stock } = req.body
+//--------Router DELETE PRODUCT IN CART BY ID PRODUCT ---------
+routerCart.delete('/:id_Cart/productos/:id', (req, res) => {
+    const { id_Cart, id } = req.params
+    const productDeleted = containerCart.deleteProductById(id_Cart, id)
     
-//     const updateProductById = containerProduct.updateProduct(id, timestamp, name, description, price, picture, code, stock)
+    console.log('Producto de Carrito a borrar: ' + JSON.stringify(productDeleted))
 
-//     res.status(201).render('productUpdated', { updateProductById } )
-// })
-
-
+    res.json(JSON.stringify(productDeleted))
+})
 
 module.exports = routerCart;

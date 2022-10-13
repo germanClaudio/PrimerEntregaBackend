@@ -14,6 +14,12 @@ app.use(express.urlencoded({ extended: true }))
 app.use('/api/productos', router)
 app.use('/api/carrito', routerCart)
 
+app.all('*', (req, res) => {
+    return res.status(404).send({
+        Error: 'Path not found.'
+    })
+})
+
 const server = app.listen(PORT, () => {
     console.log(`SERVER listen on port ${PORT}`)
 })
