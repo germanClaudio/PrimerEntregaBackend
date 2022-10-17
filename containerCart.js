@@ -1,5 +1,8 @@
 const fs = require("fs")
 
+const ContainerProducts = require('./containerProducts')
+const containerProduct = new ContainerProducts("./productos.json")
+
 module.exports = class ContainerCart {
     constructor(myFile) {
         this.myFile = myFile
@@ -20,15 +23,13 @@ module.exports = class ContainerCart {
         
     saveCart(addCart) {
         const fileContent = this.carts
-        //console.log('FileContent: '+ fileContent)
+        
         if (addCart !== undefined && fileContent !== undefined) {
             const cartToSave = JSON.stringify([...fileContent, { id_Cart: fileContent[fileContent.length - 1].id_Cart + 1 , ...addCart}], null, 2)
             try {
                 this.carts = fs.writeFileSync(this.myFile, cartToSave)
-                // console.log('try de saveproducts: '+ productToSave)
                 return { addCart }
             } catch (error) {
-                // console.log(error)
                 return { Error: 'Upps! Hubo un error y no pudimos guardar el Producto.' }
             }
         } else {
@@ -40,10 +41,9 @@ module.exports = class ContainerCart {
     deleteById(id_Cart) {
             const fileContent = this.carts
             const nonDeletedCarts = fileContent.filter(item => item.id_Cart !== parseInt(id_Cart))
-            const cartToBeDeleted = fileContent.filter(item => item.id_Cart === parseInt(id_Cart))
-            //console.log('cartToBe deleted: '+ JSON.stringify(cartToBeDeleted))
+            const cartToBeDeleted = fileContent.find(item => item.id_Cart === parseInt(id_Cart))
+            
             let arrayOrdered = nonDeletedCarts.sort((a,b) => { return a.id - b.id })
-            //console.log('id cart: '+id_Cart)    
             
             if (cartToBeDeleted !== undefined && cartToBeDeleted.length > 0) {
                     try {
@@ -76,19 +76,12 @@ module.exports = class ContainerCart {
             const fileContent = this.carts
             const cartId = fileContent.find(item => item.id_Cart === Number(id_Cart))
             
-            // console.log('4-ID: '+id_Cart)
-            // console.log('5-cartId (updateCArt): '+ JSON.stringify(cartId, null, 2))
-
             if ( cartId.id_Cart !== undefined && cartId.id_Cart > 0 || cartId !== {} ) {
                 const nonUpdatedCarts = fileContent.filter(item => item.id_Cart !== parseInt(id_Cart))
                 const updatedCart = { id_Cart: Number(id_Cart), timestamp: producToAdd.timestamp , productos: [...cartId.productos, producToAdd] }
                 
-                // console.log('6-CartUpdated: '+ JSON.stringify(updatedCart))
-                
                 let array = [updatedCart, ...nonUpdatedCarts]
                 let arrayOrdered = array.sort((a,b) => { return a.id - b.id })
-                
-                // console.log('7-Array ordered: '+JSON.stringify(arrayOrdered))
                 
                 try {
                     this.carts = fs.writeFileSync(this.myFile, JSON.stringify(arrayOrdered))
@@ -103,38 +96,37 @@ module.exports = class ContainerCart {
             }
         }
     
-        // deleteProductById(id_Cart, id) {
-        //     const fileContent = this.carts
-        //     const nonDeletedProductCarts = fileContent.filter(item => item.id_Cart !== parseInt(id_Cart))
-        //     const productCartToBeDeleted = fileContent.filter(item => item.id_Cart === parseInt(id_Cart))
+         deleteProductById(id_Cart, id) {
+            const fileContent = this.carts
+            const nonDeletedProductCarts = fileContent.filter(item => item.id_Cart !== parseInt(id_Cart))
+            const productCartToBeDeleted = fileContent.find(item => item.id_Cart === parseInt(id_Cart))
             
-        //     console.log('1-productCartToBeDeleted: ' + JSON.stringify(productCartToBeDeleted))
+            const indexCart = fileContent.indexOf(productCartToBeDeleted)  
+            const productToBeDeleted = containerProduct.getById(id)
+            const arrayCart = fileContent[indexCart].productos
+            const indexProductToBeDeleted = arrayCart.findIndex( (productToBeDeleted) => productToBeDeleted.id == parseInt(id))
 
-        //     const specificIdProductNonDeleted = productCartToBeDeleted.filter(item => item.productos.id !== Number(id))
-        //     const specificIdProductDeleted = productCartToBeDeleted.filter(item => item.productos.id === Number(id))
-            
-        //     console.log('2-Product especifico NON To Be deleted: '+ specificIdProductDeleted)
-        //     console.log('3-Product especifico To Be deleted: '+ specificIdProductDeleted)
-            
-        //     let arrayProductOrdered = specificIdProductNonDeleted.sort((a,b) => { return a.id - b.id })
+                if (productCartToBeDeleted !== {} ) {
 
-        //     let arrayCartOrdered = nonDeletedProductCarts.sort((a,b) => { return a.id - b.id })
+                    if (indexProductToBeDeleted >= 0) {
+                        arrayCart.splice(indexProductToBeDeleted, 1)
+                        //console.log('Ver array cart despues del splice: ' + JSON.stringify(arrayCart))
+                        const arrayToBeSaved = [...nonDeletedProductCarts, { id_Cart: productCartToBeDeleted.id_Cart, timestamp: productCartToBeDeleted.timestamp, productos: arrayCart }]
+                        let arrayOrdered = arrayToBeSaved.sort((a,b) => { return a.id_Cart - b.id_Cart })
                         
-        //     console.log('id cart: '+id_Cart + ' - id prod: ' + id)    
+                        try {
+                            this.carts = fs.writeFileSync(this.myFile, JSON.stringify(arrayOrdered))
+                            return { status: `Product Id#:${productToBeDeleted.id} of the Cart Id#:${id_Cart} was Deleted Successfully`, productToBeDeleted }
             
-        //     // let arrayToSave = { arrayProductOrdered }
+                        } catch (error) {
+                            return { Error: `Error Updating Cart, no product has been deleted. Descripción error: ${error}` }
+                        }
 
-        //     if (specificIdProductDeleted !== undefined && specificIdProductDeleted.length > 0) {
-        //             try {
-        //                 this.carts = fs.writeFileSync(this.myFile, JSON.stringify(arrayProductOrdered, null, 2));
-        //                 return { Success: `Product in Cart Deleted successfully - ${JSON.stringify(productCartToBeDeleted)} `}
-                    
-        //             } catch (error) {
-        //                 return { Error: `Upps! The Product in cart id#${id_Cart} with the Id#${id} was not founded.`}
-        //             }
-    
-        //     } else {
-        //         return { Error: `Sorry, the Cart Id#${id_Cart}, DOES NOT exists on the DB!` }
-        //     }
-        // }
+                    } else {
+                        return productCartToBeDeleted
+                    }
+                } else {
+                    return { Error: "Cart NOT Founded!!"}
+                }
+        }
 }

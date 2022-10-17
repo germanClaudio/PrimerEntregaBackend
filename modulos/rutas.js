@@ -12,7 +12,7 @@ const containerProduct = new ContainerProducts("./productos.json")
 const getAllProducts = containerProduct.getAllProd()
 
 //---------ADMIN / USER -----------
-const admin = true  // change to false to simulate user, change to true to simulate admin
+//const admin = true  // change to false to simulate user, change to true to simulate admin
 
 //--------Router GET ALL ---------
 router.get('/', (req, res) => {
